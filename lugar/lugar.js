@@ -1,24 +1,17 @@
 const axios = require("axios");
 
-const getLugarLatLng = async(direccion) => {
+const getLugarLatLng = async(direccion) => { // se obtiene la latitud y longitud a travez de una peticion con axios
 
     let encodeUrl = encodeURI(direccion);
 
     let resp = await axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${encodeUrl}&appid=2b348db4584f897c0640759541628485`)
-        //let location = resp.data.results[0];
-        /*console.log("Direccion: ", location.formatted_adrress);
-        console.log("lat: ", location.geometry.location.lat);
-        console.log("lng: ", location.geometry.location.lng);
-        console.log(resp);
-        //console.log(JSON.stringify(resp.data, undefined, 2));
-        //console.log(resp.status);*/
     return {
-        direccion: resp.data.name,
-        lat: resp.data.coord.lat,
-        lng: resp.data.coord.lon
+        direccion: resp.data.name, //obtenemos el nombre de la ciudad
+        lat: resp.data.coord.lat, //obtenemos la latitud  de la ciudad
+        lng: resp.data.coord.lon //obtenemos la longitud de la ciudad
     }
 }
 
 module.exports = {
-    getLugarLatLng
+    getLugarLatLng // exportamos la funcion para que puede ser usada en app.js
 }
